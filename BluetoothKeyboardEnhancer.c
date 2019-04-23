@@ -12,6 +12,21 @@ void TriggerEscKey()
     CGEventPost(kCGSessionEventTap, event);
 }
 
+void TriggerEmojiPicker()
+{
+    CGEventRef keyboard_down_event = CGEventCreateKeyboardEvent(NULL, kVK_Space, true);
+    CGEventRef keyboard_up_event = CGEventCreateKeyboardEvent(NULL, kVK_Space, false);
+
+    CGEventSetFlags(keyboard_down_event, kCGEventFlagMaskCommand | kCGEventFlagMaskControl);
+    CGEventSetFlags(keyboard_up_event, 0);
+
+    CGEventPost(kCGHIDEventTap, keyboard_down_event);
+    CGEventPost(kCGHIDEventTap, keyboard_up_event);
+
+    CFRelease(keyboard_down_event);
+    CFRelease(keyboard_up_event);
+}
+
 CFMutableDictionaryRef CreateMatchingDictionary(UInt32 usage_page, UInt32 usage)
 {
     CFMutableDictionaryRef dictionary = CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFCopyStringDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
@@ -36,6 +51,10 @@ void HIDKeyboardCallback(void* context, IOReturn result, void* sender, IOHIDValu
 
     if (usage_page == kHIDPage_Consumer && usage == kHIDUsage_Csmr_ACHome && pressed == 1) {
         TriggerEscKey();
+    }
+
+    if (usage_page == kHIDPage_KeyboardOrKeypad && usage == -1 && pressed == 1103823438081) {
+        TriggerEmojiPicker();
     }
 }
 
