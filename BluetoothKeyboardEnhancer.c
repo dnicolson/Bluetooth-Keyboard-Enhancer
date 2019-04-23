@@ -8,7 +8,7 @@
 void TriggerEscKey()
 {
     CGEventRef event;
-    event = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)kVK_Escape, true);
+    event = CGEventCreateKeyboardEvent(NULL, kVK_Escape, true);
     CGEventPost(kCGSessionEventTap, event);
 }
 
