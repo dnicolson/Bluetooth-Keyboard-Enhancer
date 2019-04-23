@@ -1,5 +1,9 @@
 # BluetoothKeyboardEnhancer
 
+<p align="center">
+  <img src="https://images-na.ssl-images-amazon.com/images/I/71t5d0fybDL._SL1500_.jpg" height="250">
+ </p>
+
 This tool performs the following with an iOS keyboard:
 
 - Sends an escape key event when the home key is pressed
