@@ -1,12 +1,12 @@
-class Ioskeyboardescapekeyenabler < Formula
+class Bluetoothkeyboardenhancer < Formula
   desc "Enables the corner home button on an iOS keyboard to function as an escape key"
-  homepage "https://github.com/dnicolson/iOSKeyboardEscapeKeyEnabler"
-  url "https://github.com/dnicolson/iOSKeyboardEscapeKeyEnabler/archive/0.1.zip"
+  homepage "https://github.com/dnicolson/BluetoothKeyboardEnhancer"
+  url "https://github.com/dnicolson/BluetoothKeyboardEnhancer/archive/0.1.zip"
   sha256 "777bd581277048189b376417eb5dcf9e1c119ec77d16dafd8f5366ed6680fcbd"
 
   def install
-    system "clang -framework IOKit -framework Carbon iOSKeyboardEscapeKeyEnabler.c -o iOSKeyboardEscapeKeyEnabler"
-    bin.install "iOSKeyboardEscapeKeyEnabler"
+    system "clang -framework IOKit -framework Carbon BluetoothKeyboardEnhancer.c -o BluetoothKeyboardEnhancer"
+    bin.install "BluetoothKeyboardEnhancer"
   end
 
   def plist; <<~EOS
@@ -18,7 +18,7 @@ class Ioskeyboardescapekeyenabler < Formula
         <string>#{plist_name}</string>
       <key>ProgramArguments</key>
       <array>
-        <string>#{bin}/iOSKeyboardEscapeKeyEnabler</string>
+        <string>#{bin}/BluetoothKeyboardEnhancer</string>
       </array>
       <key>RunAtLoad</key>
       <true/>

@@ -1,5 +1,5 @@
-// clang -framework IOKit -framework Carbon iOSKeyboardEscapeKeyEnabler.c -o iOSKeyboardEscapeKeyEnabler
-// ./iOSKeyboardEscapeKeyEnabler
+// clang -framework IOKit -framework Carbon BluetoothKeyboardEnhancer.c -o BluetoothKeyboardEnhancer
+// ./BluetoothKeyboardEnhancer
 
 #include <Carbon/Carbon.h>
 #include <IOKit/hid/IOHIDManager.h>
