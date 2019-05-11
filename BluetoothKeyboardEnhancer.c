@@ -48,12 +48,21 @@ void HIDKeyboardCallback(void* context, IOReturn result, void* sender, IOHIDValu
     uint32_t usage_page = IOHIDElementGetUsagePage(elem);
     uint32_t usage = IOHIDElementGetUsage(elem);
     long pressed = IOHIDValueGetIntegerValue(value);
+    static int ctrl_down, command_down;
 
     if (usage_page == kHIDPage_Consumer && usage == kHIDUsage_Csmr_ACHome && pressed == 1) {
         TriggerEscKey();
     }
 
-    if (usage_page == kHIDPage_KeyboardOrKeypad && usage == -1 && pressed == 1103823438081) {
+    if (usage_page == kHIDPage_KeyboardOrKeypad && usage == 0xE0) {
+        ctrl_down = pressed;
+    }
+
+    if (usage_page == kHIDPage_KeyboardOrKeypad && usage == 0xE3) {
+        command_down = pressed;
+    }
+
+    if (ctrl_down && command_down && usage_page == kHIDPage_KeyboardOrKeypad && usage == -1 && pressed == 1103823438081) {
         TriggerEmojiPicker();
     }
 }
