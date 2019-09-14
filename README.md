@@ -29,6 +29,8 @@ macOS Catalina has increased the security of keyboard input, the `bke` binary mu
 - Accessibility
 - Input Monitoring
 
+`brew services restart bluetoothkeyboardenhancer` might need to be run after installation.
+
 ### Terminal
 The `Secure Keyboard Entry` menu option must be disabled (it is by default).
 
