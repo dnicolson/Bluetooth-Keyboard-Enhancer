@@ -72,6 +72,17 @@ void HIDKeyboardCallback(void *context, IOReturn result, void *sender, IOHIDValu
     }
 }
 
+bool CheckAccessibility() {
+  #ifdef MAC_OS_X_VERSION_10_9
+    const void* keys[] = { (void*)kAXTrustedCheckOptionPrompt };
+    const void* vals[] = { (void*)kCFBooleanTrue };
+    CFDictionaryRef options = CFDictionaryCreate(NULL, keys, vals, 1, NULL, NULL);
+    return AXIsProcessTrustedWithOptions(options);
+  #else
+    return AXAPIEnabled();
+  #endif
+}
+
 int main()
 {
     IOHIDManagerRef hid_manager = IOHIDManagerCreate(kCFAllocatorDefault, kIOHIDOptionsTypeNone);
@@ -80,5 +91,7 @@ int main()
     IOHIDManagerRegisterInputValueCallback(hid_manager, HIDKeyboardCallback, NULL);
     IOHIDManagerScheduleWithRunLoop(hid_manager, CFRunLoopGetMain(), kCFRunLoopDefaultMode);
     IOHIDManagerOpen(hid_manager, kIOHIDOptionsTypeNone);
-    CFRunLoopRun();
+    if (CheckAccessibility()) {
+      CFRunLoopRun();
+    }
 }
