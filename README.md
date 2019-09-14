@@ -15,7 +15,7 @@ This tool performs the following with an iOS keyboard:
 
 The easiest way to install is to use [Homebrew](https://brew.sh/):
 
-`brew install https://raw.githubusercontent.com/dnicolson/BluetoothKeyboardEnhancer/master/bluetoothkeyboardenhancer.rb`
+`brew install dnicolson/bluetoothkeyboardenhancer/bluetoothkeyboardenhancer`
 
 The following command will run the tool automatically:
 
