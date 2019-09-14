@@ -21,13 +21,13 @@ The following command will run the tool automatically:
 
 `brew services start bluetoothkeyboardenhancer`
 
-Alternatively, you can run `BluetoothKeyboardEnhancer`  (or `BluetoothKeyboardEnhancer&` to run in the background) from the terminal.
+Alternatively, you can run `bke`  (or `bke&` to run in the background) from the terminal.
 
 ## Compiling
 
 The following command will manually compile the binary:
 
-`clang -framework IOKit -framework Carbon BluetoothKeyboardEnhancer.c -o BluetoothKeyboardEnhancer`
+`clang -framework IOKit -framework Carbon BluetoothKeyboardEnhancer.c -o bke`
 
 ## License
 
