@@ -1,3 +1,9 @@
+### Version 0.3.0
+
+- Renamed binary to bke
+- Added Catalina support
+- Moved brew formular to a tap
+
 ### Version 0.2.1
 
 - Fixed a bug where the emoji picker could be invoked incorrectly
