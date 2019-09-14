@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://images-na.ssl-images-amazon.com/images/I/71t5d0fybDL._SL1500_.jpg" height="250">
- </p>
+</p>
 
 This tool performs the following with an iOS keyboard:
 
@@ -23,7 +23,7 @@ The following command will run the tool automatically:
 
 Alternatively, you can run `bke`  (or `bke&` to run in the background) from the terminal.
 
-## Compiling
+## Compilation
 
 The following command will manually compile the binary:
 

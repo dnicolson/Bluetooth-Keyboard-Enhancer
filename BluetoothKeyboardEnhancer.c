@@ -10,6 +10,7 @@ void TriggerEscKey()
     CGEventRef event;
     event = CGEventCreateKeyboardEvent(NULL, kVK_Escape, true);
     CGEventPost(kCGSessionEventTap, event);
+    CFRelease(event);
 }
 
 void TriggerEmojiPicker()
