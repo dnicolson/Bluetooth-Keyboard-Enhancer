@@ -5,8 +5,8 @@ class Bluetoothkeyboardenhancer < Formula
   sha256 "aec778ada4b3f7c716c052fbec1518186d7da25af07033aa98afd0ab8a67ed16"
 
   def install
-    system "clang -framework IOKit -framework Carbon BluetoothKeyboardEnhancer.c -o BluetoothKeyboardEnhancer"
-    bin.install "BluetoothKeyboardEnhancer"
+    system "clang -framework IOKit -framework Carbon BluetoothKeyboardEnhancer.c -o bke"
+    bin.install "bke"
   end
 
   def plist; <<~EOS
@@ -18,7 +18,7 @@ class Bluetoothkeyboardenhancer < Formula
         <string>#{plist_name}</string>
       <key>ProgramArguments</key>
       <array>
-        <string>#{bin}/BluetoothKeyboardEnhancer</string>
+        <string>#{bin}/bke</string>
       </array>
       <key>RunAtLoad</key>
       <true/>
