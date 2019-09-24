@@ -36,6 +36,7 @@ The `Secure Keyboard Entry` menu option must be disabled (it is by default).
 
 ### iTerm2
 By default keyboard input is secure, the following command must run to enable `bke` (useful for `vim`):
+
 `defaults write com.googlecode.iterm2 "Secure Input" 0` 
 
 ## Compilation
