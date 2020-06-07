@@ -13,6 +13,25 @@ void TriggerEscKey()
     CFRelease(event);
 }
 
+void TriggerForceQuit()
+{
+    system("osascript -l JavaScript -e \"Application('System Events').processes['Finder'].menuBars[0].menus['Apple'].menuItems['Force Quit…'].click()\" 1>/dev/null");
+}
+
+void TriggerForceQuitFrontmostApp()
+{
+    pid_t pid;
+    ProcessSerialNumber psn;
+
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    GetFrontProcess(&psn);
+    GetProcessPID(&psn, &pid);
+    #pragma clang diagnostic pop
+
+    killpg(getpgid(pid), SIGTERM);
+}
+
 void TriggerEmojiPicker()
 {
     CGEventRef keyboard_down_event = CGEventCreateKeyboardEvent(NULL, kVK_Space, true);
@@ -53,7 +72,15 @@ void HIDKeyboardCallback(void *context, IOReturn result, void *sender, IOHIDValu
 
     if (usage_page == kHIDPage_Consumer && usage == kHIDUsage_Csmr_ACHome && pressed == 1)
     {
-        TriggerEscKey();
+        if (option_down && command_down) {
+            if (shift_down) {
+                TriggerForceQuitFrontmostApp();
+            } else {
+                TriggerForceQuit();
+            }
+        } else {
+            TriggerEscKey();
+        }
     }
 
     if (usage_page == kHIDPage_KeyboardOrKeypad && (usage == 0xE1 || usage == 0xE5))
