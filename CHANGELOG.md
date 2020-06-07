@@ -1,3 +1,7 @@
+### Version 0.4.0
+
+- Added support for force quit
+
 ### Version 0.3.0
 
 - Renamed binary to bke
