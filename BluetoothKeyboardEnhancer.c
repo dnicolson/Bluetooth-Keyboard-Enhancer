@@ -7,8 +7,7 @@
 
 void TriggerEscKey()
 {
-    CGEventRef event;
-    event = CGEventCreateKeyboardEvent(NULL, kVK_Escape, true);
+    CGEventRef event = CGEventCreateKeyboardEvent(NULL, kVK_Escape, true);
     CGEventPost(kCGSessionEventTap, event);
     CFRelease(event);
 }
@@ -70,6 +69,33 @@ void HIDKeyboardCallback(void *context, IOReturn result, void *sender, IOHIDValu
     long pressed = IOHIDValueGetIntegerValue(value);
     static int shift_down, ctrl_down, option_down, command_down;
 
+    if (usage_page == kHIDPage_KeyboardOrKeypad) {
+        if (usage == 0xE1 || usage == 0xE5)
+        {
+            shift_down = pressed;
+        }
+
+        if (usage == 0xE0)
+        {
+            ctrl_down = pressed;
+        }
+
+        if (usage == 0xE2 || usage == 0xE6)
+        {
+            option_down = pressed;
+        }
+
+        if (usage == 0xE3 || usage == 0xE7)
+        {
+            command_down = pressed;
+        }
+
+        if (ctrl_down && command_down && usage == -1 && pressed == 1103823438081)
+        {
+            TriggerEmojiPicker();
+        }
+    }
+
     if (usage_page == kHIDPage_Consumer && usage == kHIDUsage_Csmr_ACHome && pressed == 1)
     {
         if (option_down && command_down) {
@@ -81,31 +107,6 @@ void HIDKeyboardCallback(void *context, IOReturn result, void *sender, IOHIDValu
         } else {
             TriggerEscKey();
         }
-    }
-
-    if (usage_page == kHIDPage_KeyboardOrKeypad && (usage == 0xE1 || usage == 0xE5))
-    {
-        shift_down = pressed;
-    }
-
-    if (usage_page == kHIDPage_KeyboardOrKeypad && usage == 0xE0)
-    {
-        ctrl_down = pressed;
-    }
-
-    if (usage_page == kHIDPage_KeyboardOrKeypad && (usage == 0xE2 || usage == 0xE6))
-    {
-        option_down = pressed;
-    }
-
-    if (usage_page == kHIDPage_KeyboardOrKeypad && (usage == 0xE3 || usage == 0xE7))
-    {
-        command_down = pressed;
-    }
-
-    if (ctrl_down && command_down && usage_page == kHIDPage_KeyboardOrKeypad && usage == -1 && pressed == 1103823438081)
-    {
-        TriggerEmojiPicker();
     }
 }
 
