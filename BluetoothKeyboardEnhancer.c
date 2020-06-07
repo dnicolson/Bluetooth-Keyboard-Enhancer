@@ -49,11 +49,16 @@ void HIDKeyboardCallback(void *context, IOReturn result, void *sender, IOHIDValu
     uint32_t usage_page = IOHIDElementGetUsagePage(elem);
     uint32_t usage = IOHIDElementGetUsage(elem);
     long pressed = IOHIDValueGetIntegerValue(value);
-    static int ctrl_down, command_down;
+    static int shift_down, ctrl_down, option_down, command_down;
 
     if (usage_page == kHIDPage_Consumer && usage == kHIDUsage_Csmr_ACHome && pressed == 1)
     {
         TriggerEscKey();
+    }
+
+    if (usage_page == kHIDPage_KeyboardOrKeypad && (usage == 0xE1 || usage == 0xE5))
+    {
+        shift_down = pressed;
     }
 
     if (usage_page == kHIDPage_KeyboardOrKeypad && usage == 0xE0)
@@ -61,7 +66,12 @@ void HIDKeyboardCallback(void *context, IOReturn result, void *sender, IOHIDValu
         ctrl_down = pressed;
     }
 
-    if (usage_page == kHIDPage_KeyboardOrKeypad && usage == 0xE3)
+    if (usage_page == kHIDPage_KeyboardOrKeypad && (usage == 0xE2 || usage == 0xE6))
+    {
+        option_down = pressed;
+    }
+
+    if (usage_page == kHIDPage_KeyboardOrKeypad && (usage == 0xE3 || usage == 0xE7))
     {
         command_down = pressed;
     }
