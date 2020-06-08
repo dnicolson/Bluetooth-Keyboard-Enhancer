@@ -6,7 +6,7 @@
 
 - Renamed binary to bke
 - Added Catalina support
-- Moved brew formular to a tap
+- Moved brew formula to a tap
 
 ### Version 0.2.1
 
