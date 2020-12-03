@@ -41,7 +41,8 @@ By default keyboard input is secure, the following command must run to enable `b
 
 ## Limitations
 
-CGEvents are used to trigger some of the key commands, this means apps such as the Xcode Simulator will not respond to the escape key as they listen to the lower IOHID level.
+- CGEvents are used to trigger some of the key commands, this means apps such as the Xcode Simulator will not respond to the escape key as they listen to the lower IOHID level.
+- It seems that keyboards with the Airoha AB1108 integrated SoC produce incorrect values for Control-Command-Up and Control-Command-Space (https://github.com/dnicolson/BluetoothKeyboardEnhancer/issues/4), this [gist](https://gist.github.com/dnicolson/4c095d5f7662cfe0fb84c60c55fbc6e3) documents this in more detail.
 
 ## Compilation
 
