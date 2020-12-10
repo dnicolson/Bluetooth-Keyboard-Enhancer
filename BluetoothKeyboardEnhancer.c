@@ -88,7 +88,7 @@ void HIDKeyboardCallback(void *context, IOReturn result, void *sender, IOHIDValu
                 break;
         }
 
-        if (ctrl_down && command_down && usage == -1 && pressed == 1103823438081)
+        if (ctrl_down && command_down && usage == -1 && pressed == 0x10101010101 /*1103823438081*/)
         {
             TriggerEmojiPicker();
         }
