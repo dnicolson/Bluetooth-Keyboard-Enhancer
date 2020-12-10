@@ -70,24 +70,22 @@ void HIDKeyboardCallback(void *context, IOReturn result, void *sender, IOHIDValu
     static int shift_down, ctrl_down, option_down, command_down;
 
     if (usage_page == kHIDPage_KeyboardOrKeypad) {
-        if (usage == 0xE1 || usage == 0xE5)
-        {
-            shift_down = pressed;
-        }
-
-        if (usage == 0xE0)
-        {
-            ctrl_down = pressed;
-        }
-
-        if (usage == 0xE2 || usage == 0xE6)
-        {
-            option_down = pressed;
-        }
-
-        if (usage == 0xE3 || usage == 0xE7)
-        {
-            command_down = pressed;
+        switch (usage) {
+            case kHIDUsage_KeyboardLeftShift:
+            case kHIDUsage_KeyboardRightShift:
+                shift_down = pressed;
+                break;
+            case kHIDUsage_KeyboardLeftControl:
+                ctrl_down = pressed;
+                break;
+            case kHIDUsage_KeyboardLeftAlt:
+            case kHIDUsage_KeyboardRightAlt:
+                option_down = pressed;
+                break;
+            case kHIDUsage_KeyboardLeftGUI:
+            case kHIDUsage_KeyboardRightGUI:
+                command_down = pressed;
+                break;
         }
 
         if (ctrl_down && command_down && usage == -1 && pressed == 1103823438081)
