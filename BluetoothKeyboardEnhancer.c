@@ -22,11 +22,11 @@ void TriggerForceQuitFrontmostApp()
     pid_t pid;
     ProcessSerialNumber psn;
 
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     GetFrontProcess(&psn);
     GetProcessPID(&psn, &pid);
-    #pragma clang diagnostic pop
+#pragma clang diagnostic pop
 
     killpg(getpgid(pid), SIGTERM);
 }
@@ -88,14 +88,12 @@ void HIDKeyboardCallback(void *context, IOReturn result, void *sender, IOHIDValu
                 break;
         }
 
-        if (ctrl_down && command_down && usage == -1 && pressed == 0x10101010101 /*1103823438081*/)
-        {
+        if (ctrl_down && command_down && usage == -1 && pressed == 0x10101010101 /*1103823438081*/) {
             TriggerEmojiPicker();
         }
     }
 
-    if (usage_page == kHIDPage_Consumer && usage == kHIDUsage_Csmr_ACHome && pressed == 1)
-    {
+    if (usage_page == kHIDPage_Consumer && usage == kHIDUsage_Csmr_ACHome && pressed == 1) {
         if (option_down && command_down) {
             if (shift_down) {
                 TriggerForceQuitFrontmostApp();
@@ -108,15 +106,16 @@ void HIDKeyboardCallback(void *context, IOReturn result, void *sender, IOHIDValu
     }
 }
 
-bool CheckAccessibility() {
-  #ifdef MAC_OS_X_VERSION_10_9
+bool CheckAccessibility()
+{
+#ifdef MAC_OS_X_VERSION_10_9
     const void* keys[] = { (void*)kAXTrustedCheckOptionPrompt };
     const void* vals[] = { (void*)kCFBooleanTrue };
     CFDictionaryRef options = CFDictionaryCreate(NULL, keys, vals, 1, NULL, NULL);
     return AXIsProcessTrustedWithOptions(options);
-  #else
+#else
     return AXAPIEnabled();
-  #endif
+#endif
 }
 
 int main()
@@ -128,6 +127,6 @@ int main()
     IOHIDManagerScheduleWithRunLoop(hid_manager, CFRunLoopGetMain(), kCFRunLoopDefaultMode);
     IOHIDManagerOpen(hid_manager, kIOHIDOptionsTypeNone);
     if (CheckAccessibility()) {
-      CFRunLoopRun();
+        CFRunLoopRun();
     }
 }
